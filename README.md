@@ -4,7 +4,7 @@ This testbed is used by researchers to investigate robotics, control and compute
 
 # Bug Tracking
 
-- 3.04a: Occasionally on first startup the pucks alternate between their on/off state. Hit "STOP" float; start the float again and the bug should be gone.The previous experiment diagram is still running but the user either started a new experiment, or tried to turn on the pucks.
+- 3.04a (FIXED AS OF 3.07): Occasionally on first startup the pucks alternate between their on/off state. Hit "STOP" float; start the float again and the bug should be gone.The previous experiment diagram is still running but the user either started a new experiment, or tried to turn on the pucks.
 
 - 3.04b: Very rarely, the PhaseSpace cameras will fail to get a lock on the LEDs. Hit the emergency stop and reset the experiment.
 
@@ -12,4 +12,4 @@ This testbed is used by researchers to investigate robotics, control and compute
 
 - 3.05a: Animation may buffer and "Stop Animation" may not be instant.
 
-- The Pi must be unplugged before plugging in the charging cable. Kirk believes this is because the platforms have a floating ground, which, upon being immediately being brought to the grid's ground, sends an electrical pulse through the platform which damages the Pi. A possible solution is to install a capacitor on the Negative line of the platform to absorb such pulses.
+- The Pi must be unplugged before plugging in the charging cable. Kirk believes this is because the platforms have a floating ground, which, upon being brought to the grid's ground, sends an electrical pulse through the platform which damages the Pi. A possible solution is to install a capacitor on the negative line of the platform to absorb such pulses (this is called "pre-charging" the circuit components).

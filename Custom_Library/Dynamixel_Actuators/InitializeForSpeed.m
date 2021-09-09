@@ -19,9 +19,10 @@ classdef InitializeForSpeed < matlab.System ...
     
     properties
         
-        P_GAIN          = 200;
-        I_GAIN          = 0;
-        VELOCITY_LIMIT  = 0;
+        P_GAIN            = 100;
+        I_GAIN            = 1920;
+        VELOCITY_LIMIT    = 1023;
+        ACCELERATION_TIME = 2000;
         
     end
     
@@ -50,7 +51,7 @@ classdef InitializeForSpeed < matlab.System ...
                  coder.cinclude('dynamixel_sdk.h');
                  coder.cinclude('dynamixel_functions.h');
                  coder.ceval('initialize_dynamixel_speed_control',obj.P_GAIN, obj.I_GAIN, ...
-                      obj.VELOCITY_LIMIT);
+                      obj.VELOCITY_LIMIT, obj.ACCELERATION_TIME);
             end
         end
         
@@ -67,7 +68,9 @@ classdef InitializeForSpeed < matlab.System ...
                 % Place simulation termination code here
             else
                 % Call C-function implementing device termination
-                %coder.ceval('sink_terminate');
+                coder.cinclude('dynamixel_sdk.h');
+                coder.cinclude('dynamixel_functions.h');
+                coder.ceval('terminate_dynamixel');
             end
         end
     end
@@ -121,7 +124,9 @@ classdef InitializeForSpeed < matlab.System ...
             header = matlab.system.display.Header('InitializeForSpeed','Title',...
                 'Dynamixel Actuator - Initialize Speed Control','Text',...
                 ['This simulink block initializes the actuators for speed control. '...
-                'This block must be placed ONCE in the diagram, at the top level.' newline]);
+                'This block must be placed ONCE in the diagram, at the top level.' ...
+                'The acceleration time [ms] dictates how much time is spent accelerating'...
+                ' the arm to the desired speed, 0 = as fast as possible.' newline]);
         end
         
     end

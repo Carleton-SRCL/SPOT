@@ -16,7 +16,7 @@ else
 
     cd([cd '\Projects\' expName{1,1}]);
 
-    movefile('Template_v3_06_2020a.slx',[expName{1,1} '.slx']);
+    movefile('Template_v3_07_2020a.slx',[expName{1,1} '.slx']);
 end
 
 

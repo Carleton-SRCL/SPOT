@@ -1,15 +1,17 @@
-# Welcome to SPOT3
+# Welcome to SPOT
 
-This testbed is used by researchers to investigate robotics, control and computer vision technologies enabling spacecraft proximity operation tasks, such as inspection maneuvers, rendezvous and docking, robotic capture of a tumbling target, and on-orbit assembly of large structure. SPOT consists of two air-bearing spacecraft platforms operating in close proximity on a 2.4 m x 3.7 m granite surface. The use of air bearing on the platforms reduces the friction to a negligible level. Both platforms are actuated by a reaction wheel and compressed air expelled through miniature air nozzles, to provide three degree-of-freedom (3DOF) control authority. The motion of both platforms is measured in real-time through LEDs which are tracked by an eight-camera motion capture system. This provides highly accurate ground truth position and attitude data to evaluate the performance of the new robotics, control and computer vision technologies.
+This testbed is used by researchers to investigate robotics, control and computer vision technologies enabling spacecraft proximity operation tasks, such as inspection maneuvers, rendezvous and docking, robotic capture of a tumbling target, and on-orbit assembly of large structure. SPOT consists of two air-bearing spacecraft platforms operating in close proximity on a granite surface. The use of air bearing on the platforms reduces the friction to a negligible level. Both platforms are actuated by compressed air expelled through small air nozzles, to provide three degree-of-freedom (3DOF) control authority. One platform contains a reaction wheel. The motion of both platforms is measured in real-time through LEDs which are tracked by a motion capture system. This provides highly accurate ground truth position and attitude data to evaluate the performance of the new robotics, control, and computer vision technologies.
 
-# Bug Tracking
+This repository contains the software developed for SPOT. The software is a mix of Simulink code (making use of existing code that allows us to deploy the Simulink diagrams to a Raspberry Pi), and custom device driver blocks written in C++ code. It's been designed to be user-friendly, but is a constant work in progress and can be overwhelming for new users. This repository also contains a detailed Wiki on the entire laboratory in an attempt to help guide new users. New users should read this Wiki carefully and watch any related videos before conducting an experiment. 
 
-- 3.04a (FIXED AS OF 3.07): Occasionally on first startup the pucks alternate between their on/off state. Hit "STOP" float; start the float again and the bug should be gone.The previous experiment diagram is still running but the user either started a new experiment, or tried to turn on the pucks.
+To get started, the following information may be useful:
+  - "Home" is organized according to the different sections of the wiki. It is the table of contents. Look through the table of contents and familiarize yourself with it.
+  - "Overview of the Spacecraft Proximity Operations Testbed" provides extensive details on the various hardware and software features. Read it!
+  - "Compressor Instructions" provides instructions on... the compressor! You won't get very far without knowing how to fill the air tanks, so ensure you know how to do it properly and (most importantly) safely.
+  - "Initial Software Setup" will tell you what to install on your personal computer to run the software directly from it. This is great for developing experiments at home, and it is even possible to run experiments from your own computer if you make it the ground station.
+  - "Setting up the Laboratory for an Experiment" walks you through the steps to properly set up the lab for an experiment, including cleaning procedures.
+  - "Running a Simulation/Experiment" provide a stwp-by-step guide to running a simulation and an experiment. Useful!
+  - "Worked Examples" is generally always under contruction, but does contain plenty of examples. These range from basic experiments like tracking a circle with a PID controller, to more complicated past research like Lypunov Docking or Simple Adaptive Control.
+  - "Frequently Asked Questions" contains Q&A's that have come up many times in the past. Before submitting a bug or software request, check this list!
 
-- 3.04b: Very rarely, the PhaseSpace cameras will fail to get a lock on the LEDs. Hit the emergency stop and reset the experiment.
-
-- 3.04c (FIXED AS OF 3.05): If a diagram has been run in external mode, all diagrams will switch from "build" to "build and run" with no warning to the user. The only way to get around this at the moment is to manually check that "build" is selected under the build actions.
-
-- 3.05a: Animation may buffer and "Stop Animation" may not be instant.
-
-- The Pi must be unplugged before plugging in the charging cable. Kirk believes this is because the platforms have a floating ground, which, upon being brought to the grid's ground, sends an electrical pulse through the platform which damages the Pi. A possible solution is to install a capacitor on the negative line of the platform to absorb such pulses (this is called "pre-charging" the circuit components).
+The Wiki contains even more useful information then what was listed above, and it's HIGHLY recommended that new users read through the entire Wiki. Seriously, **READ it first, ASK questions after**.

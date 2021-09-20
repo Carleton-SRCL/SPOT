@@ -10,7 +10,7 @@ To get started, the following information may be useful:
   - "Compressor Instructions" provides instructions on... the compressor! You won't get very far without knowing how to fill the air tanks, so ensure you know how to do it properly and (most importantly) safely.
   - "Initial Software Setup" will tell you what to install on your personal computer to run the software directly from it. This is great for developing experiments at home, and it is even possible to run experiments from your own computer if you make it the ground station.
   - "Setting up the Laboratory for an Experiment" walks you through the steps to properly set up the lab for an experiment, including cleaning procedures.
-  - "Running a Simulation/Experiment" provide a stwp-by-step guide to running a simulation and an experiment. Useful!
+  - "Running a Simulation/Experiment" provide a step-by-step guide to running a simulation and an experiment. Useful!
   - "Worked Examples" is generally always under contruction, but does contain plenty of examples. These range from basic experiments like tracking a circle with a PID controller, to more complicated past research like Lypunov Docking or Simple Adaptive Control.
   - "Frequently Asked Questions" contains Q&A's that have come up many times in the past. Before submitting a bug or software request, check this list!
 

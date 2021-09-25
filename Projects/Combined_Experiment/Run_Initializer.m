@@ -10,6 +10,7 @@
 clear;
 clc;
 close all force;
+addpath(genpath('../../Custom_Library'))
 
 warning('off','all')
 

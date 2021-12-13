@@ -896,8 +896,7 @@ def pose_model_images(path, epochs_to_wait_for_improve, batch_size, num_epochs, 
 
 def Main():
     #video_trainer()
-    image_trainer()
-    #generateImageData('/Users/FrankDespond/Desktop/Test_code', 30, 400, 400)
+    image_trainer()    
     # getModelArchitecture3Test(320, 320, 3)
     # getModelArchitecture3Test(320, 320, 7)
 

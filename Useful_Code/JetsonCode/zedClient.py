@@ -122,7 +122,7 @@ def zedCameraProcess(commQueue, outQueue):
             if timestamp_diff > 10.0 and not positional_data == '':
                 last_timestamp = timestamp
                 data_request_time_ns = perf_counter()/(1e-09)
-                file_name = '/home/spot/Frank/spot/CameraData/' + datetime.datetime.today().strftime('%Y-%m-%d-%H-%M-%S-%f')
+                file_name = PATH_NAME_TBD
                 # send request to PI for positional data
                 out_data = str(1) + "\n"
                 outQueue.put(out_data)

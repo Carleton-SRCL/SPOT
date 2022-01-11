@@ -64,7 +64,7 @@ void initialize_dynamixel_position_control(double P_GAIN, double I_GAIN, double 
     int dxl_comm_result   = COMM_TX_FAIL;
         
     // Open COM port for serial communication with the actuators
-   portHandler->openPort();
+    portHandler->openPort();
    
     // Set port baudrate
 	portHandler->setBaudRate(BAUDRATE);

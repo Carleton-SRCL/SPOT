@@ -1,6 +1,8 @@
 function ICStructure = getICStructure()
 %% Simply meant to namespace the initial condition code.
 
+d2r = pi/180;
+
 % Redefine lengths of the table for simplicity:
 xLength                        = 3.51155;   % [m]
 yLength                        = 2.41935;   % [m]

@@ -88,39 +88,6 @@ noise_variance_BLUE            = 0;
 % Chaser spacecraft control gain.
 kd = 5.0; % P gain for the controller.
 
-%% TARGET SPACECRAFT PHYSICAL CHARACTERISTICS: 
-
-% PARAMETERS I CANNOT CHANGE (physical characteristics of target).
-theta_d             = 30*d2r;           % Angle of the docking cone.
-d                   = [0.16;0.542;0];   % docking position.
-d_norm              = sqrt(sum(d.^2));  % Norm of the docking position.
-o_hat_prime         = [0;1;0];          % Orientation of the docking cone.
-
-% For the max acceleration:
-a_max               = 0.4/BLACKMass;    % Assuming a 0.4N max.
-
-%% SELECT INITIAL CONDITIONS:
-
-% Setup all of our initial conditions:
-ICStructure = getICStructure();
-
-% Select the conditions:
-initialConditionSet = 1;
-
-w_body = ICStructure.w_body{initialConditionSet};
-rT_I0 = ICStructure.rT_I0{initialConditionSet};
-rC_I0 = ICStructure.rC_I0{initialConditionSet};
-
-% NOTE - according to my thesis work, the following rotational parameters
-% apply to a spacecraft spinning at a constant rate:
-%
-% w_max == abs(w_body)
-% rotNorm == w_body^2
-% dockingPortNorm == w_body^2 * d_norm
-w_max = abs(w_body);
-rotNorm = w_body^2;
-dockingPortNorm = rotNorm * d_norm;
-
 % Pick the home states and the maximum amount of time we expect
 % an experiment to run:
 Phase3_SubPhase4_Duration = 3.0*60;
@@ -148,7 +115,6 @@ baseRate                       = 0.05;      % 20 Hz
 serverRate                     = 0.1;       % 10 Hz
 
 %% Set the duration of each major phase in the experiment, in seconds:
-
 
 % Set the duration of the sub-phases. Sub-phases occur during the
 % experiment phase (Phase3_Duration) and must be manually inserted into the
@@ -240,6 +206,47 @@ thruster_dist2CG_RED          = [49.92;-78.08;70.46;-63.54;81.08;-50.42;57.44;-7
 thruster_dist2CG_BLACK        = [83.42;-52.58;55.94;-60.05;54.08;-53.92;77.06;-55.94];
 thruster_dist2CG_BLUE         = [83.42;-52.58;55.94;-60.05;54.08;-53.92;77.06;-55.94];
 
+%% SELECT WEIGHTS FOR PARAMETER OPTIMIZATION:
+W_CLVF = [1,100];
+W_LVF = [1,100];
+
+%% TARGET SPACECRAFT PHYSICAL CHARACTERISTICS: 
+
+% PARAMETERS I CANNOT CHANGE (physical characteristics of target).
+theta_d             = 30*d2r;           % Angle of the docking cone.
+d                   = [0.16;0.542;0];   % docking position.
+d_norm              = sqrt(sum(d.^2));  % Norm of the docking position.
+o_hat_prime         = [0;1;0];          % Orientation of the docking cone.
+
+% For the max acceleration:
+u_max_scalar = 0.4;                                 % Approx max force.
+a_max               = u_max_scalar/BLACKMass;       % Max accel given max force.
+
+%% SELECT INITIAL CONDITIONS:
+
+% Setup all of our initial conditions:
+ICStructure = getICStructure();
+
+% Select the conditions:
+initialConditionSet = 4;
+
+w_body = ICStructure.w_body{initialConditionSet};
+rT_I0 = ICStructure.rT_I0{initialConditionSet};
+rC_I0 = ICStructure.rC_I0{initialConditionSet};
+
+rC_T0 = rC_I0 - rT_I0;
+vC_T0 = zeros(3,1);
+
+% NOTE - according to my thesis work, the following rotational parameters
+% apply to a spacecraft spinning at a constant rate:
+%
+% w_max == abs(w_body)
+% rotNorm == w_body^2
+% dockingPortNorm == w_body^2 * d_norm
+w_max = abs(w_body);
+rotNorm = w_body^2;
+dockingPortNorm = rotNorm * d_norm;
+
 %% SETUP THE SWITCH STRUCTURE:
 % For the switching condition:
 acceptableRadius        = 0.05;                     % a 5cm radius.
@@ -296,7 +303,7 @@ disp("LVF deltaV estimate: " + num2str(F_est_LVF) + " m/s.")
 %% CLVF DESIGN PROCEDURE
 % PERFORMING THE DESIGN PROCEDURE OF THE THREE GAINS TO SELECT:
 
-aTimesOVec = SpacecraftStructure.d + a_prime*SpacecraftStructure.o_hat_prime;
+aTimesOVec = d + a_prime*o_hat_prime;
 a = sqrt(sum(aTimesOVec.^2));
 o_hat_B = aTimesOVec./a;
 
@@ -351,7 +358,18 @@ disp("CLVF Fuel estimate is: " + num2str(F_est) + " m/s.");
 
 disp("new ka is " + num2str(ka));
 disp("new kc is " + num2str(kc));
-disp("new b is " + num2str(b));            
+disp("new b is " + num2str(b));  
+
+%% MPC DESIGN PROCEDURE:
+% Select the weighting matrices:
+R = eye(3);
+Q = eye(6)*100;
+Q_final = Q*100;
+
+% Get the A_cone and b_cone [body frame] approximation of the docking cone:
+C_CB = C3(pi/2);
+[A_cone, b_cone] = return_square_cone(theta_d, d, C_CB);
+MPCStructure = getMPCStructure(BLACKMass, b_cone, R, Q, Q_final, u_max_scalar, kc, aTimesOVec);
 
 %%  Set the drop, initial, and home positions for each platform:
 

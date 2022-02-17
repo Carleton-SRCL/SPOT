@@ -1,4 +1,4 @@
-function [h, a_ff, r, theta] = CLVF2(r_T, w_OI, w_dot_OI, o_hat, vt_I, at_I, a, b, ka, kc, vC_T,q)
+function [h, a_ff, r, theta, r_hat, a_hat] = CLVF_quad(r_T, w_OI, w_dot_OI, o_hat, vt_I, at_I, a, b, ka, kc, vC_T,q)
 % CLVF is the function for the cascaded Lyapunov vector field.
 
 %% WORKING OUT THE DESIRED VELOCITY
@@ -48,8 +48,14 @@ function [h, a_ff, r, theta] = CLVF2(r_T, w_OI, w_dot_OI, o_hat, vt_I, at_I, a, 
     
     
         % Next, for velocity in the position direction:
+%             if abs(r-a) <= b
+%                 vc = kc*(a-r)/b;
+%             else
+%                 vc = kc*sign(a-r);
+%             end
+
             if abs(r-a) <= b
-                vc = kc*(a-r)/b;
+                vc = sign(a-r)  *  (-kc/b^2*abs(r-a)^2 + 2*kc/b*abs(r-a));
             else
                 vc = kc*sign(a-r);
             end
@@ -81,7 +87,7 @@ function [h, a_ff, r, theta] = CLVF2(r_T, w_OI, w_dot_OI, o_hat, vt_I, at_I, a, 
 %             a_hat_dot_PART3 = zeros(3,1);
 %             
 %             a_hat_dot = a_hat_dot_PART1 + a_hat_dot_PART2 + a_hat_dot_PART3;
-           d_a_hat_d_r_hat = (eye(3,3) - a_hat*a_hat')/(a_hat'*o_hat+q)  *  (-r_hat*o_hat' - (r_hat'*o_hat)*eye(3,3));
+           d_a_hat_d_r_hat = (eye(3,3) - a_hat*a_hat')/(a_hat'*o_hat+q)  *  (-r_hat*o_hat' - (r_hat'*o_hat)*eye(3,3)); %2*o_hat*r_hat'
            d_a_hat_d_o_hat = e_hat*e_hat'/(a_hat'*o_hat + q);
            
            a_hat_dot = d_a_hat_d_r_hat*r_hat_dot + d_a_hat_d_o_hat*cross(w_OI,o_hat);
@@ -114,12 +120,23 @@ function [h, a_ff, r, theta] = CLVF2(r_T, w_OI, w_dot_OI, o_hat, vt_I, at_I, a, 
     
             sa_dot = dsadr*r_dot + dsadtheta*theta_dot; % MATCHES PAPER
             
-        % Last, for va_dot:
-            if abs(r-a) <= b
-                dvcdr = -(kc/b);
+        % Last, for vc_dot:
+%             if abs(r-a) <= b
+%                 dvcdr = -(kc/b);
+%             else
+%                 dvcdr = 0;
+%             end
+
+            if abs(r-a) <= b % From 281 in the nonlinear/thesis book.
+                if r-a >= 0
+                    dvcdr = 2*kc/b^2*(r-a)-2*kc/b;
+                else
+                    dvcdr = -2*kc/b^2*(r-a)-2*kc/b;
+                end
             else
                 dvcdr = 0;
             end
+            
             
             vc_dot = dvcdr*r_dot;
             
@@ -131,4 +148,3 @@ function [h, a_ff, r, theta] = CLVF2(r_T, w_OI, w_dot_OI, o_hat, vt_I, at_I, a, 
 
     
 end
-

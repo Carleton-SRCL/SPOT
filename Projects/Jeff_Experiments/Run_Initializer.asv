@@ -82,23 +82,6 @@ Kd_tblue                       = 0.4;
 noise_variance_RED             = 0;
 noise_variance_BLACK           = 0;
 noise_variance_BLUE            = 0;
-
-%% CUSTOM CONTROLLER DESIGN:
-
-% Chaser spacecraft control gain.
-kd = 5.0; % P gain for the controller.
-
-%% TARGET SPACECRAFT PHYSICAL CHARACTERISTICS: 
-
-% PARAMETERS I CANNOT CHANGE (physical characteristics of target).
-theta_d             = 30*d2r;           % Angle of the docking cone.
-d                   = [0.16;0.542;0];   % docking position.
-d_norm              = sqrt(sum(d.^2));  % Norm of the docking position.
-o_hat_prime         = [0;1;0];          % Orientation of the docking cone.
-
-% For the max acceleration:
-a_max               = 0.4/BLACKMass;    % Assuming a 0.4N max.
-
 %% SELECT INITIAL CONDITIONS:
 
 % Setup all of our initial conditions:
@@ -111,21 +94,14 @@ w_body = ICStructure.w_body{initialConditionSet};
 rT_I0 = ICStructure.rT_I0{initialConditionSet};
 rC_I0 = ICStructure.rC_I0{initialConditionSet};
 
-% NOTE - according to my thesis work, the following rotational parameters
-% apply to a spacecraft spinning at a constant rate:
-%
-% w_max == abs(w_body)
-% rotNorm == w_body^2
-% dockingPortNorm == w_body^2 * d_norm
-w_max = abs(w_body);
-rotNorm = w_body^2;
-dockingPortNorm = rotNorm * d_norm;
-
 % Pick the home states and the maximum amount of time we expect
 % an experiment to run:
 Phase3_SubPhase4_Duration = 3.0*60;
 home_states_RED = [xLength/2+0.4; yLength/2; 0]; % [m; m; rad]
 home_states_BLACK = [xLength/2-0.4; yLength/2; 0]; % [m; m; rad]
+
+% Chaser spacecraft control gain.
+kd = 5.0; % P gain for the controller.
     
 
 %% Set the base sampling rate: 
@@ -240,120 +216,113 @@ thruster_dist2CG_RED          = [49.92;-78.08;70.46;-63.54;81.08;-50.42;57.44;-7
 thruster_dist2CG_BLACK        = [83.42;-52.58;55.94;-60.05;54.08;-53.92;77.06;-55.94];
 thruster_dist2CG_BLUE         = [83.42;-52.58;55.94;-60.05;54.08;-53.92;77.06;-55.94];
 
-%% SETUP THE SWITCH STRUCTURE:
-% For the switching condition:
-acceptableRadius        = 0.05;                     % a 5cm radius.
-timeThreshold           = 5;                        % 5 seconds staying in the radius
-cntThreshold            = timeThreshold/baseRate;
+%% PARAMETERS AND INITIAL CONDITIONS  
         
-%% LVF DESIGN PROCEDURE
+% PARAMETERS I CAN CHANGE
+b = 0.20;       % Initial guess for b.
+ka = 0.08;      % Initial guess for ka.
+kc = 0.08;      % Initial guess for kc.
 
-% Safe distance to stay away from the docking cone:
+% PARAMETERS I CANNOT CHANGE (physical characteristics of target).
+theta_d = 30*d2r;           % Angle of the docking cone.
+d = [0.16;0.542;0];         % docking position.
+d_norm = sqrt(sum(d.^2));   % Norm of the docking position.
+o_hat_prime = [0;1;0];      % Orientation of the docking cone.
+
+% For the max acceleration:
+a_max = 0.4/BLACKMass; % ASSUMING A 0.4N MAX
+        
+%% LVF DESIGN PROCEDURE:
+
+% For the switching condition:
+acceptableRadius = 0.05; % a 5cm radius.
+timeThreshold = 5; % 5 seconds staying in the radius
+cntThreshold = timeThreshold/baseRate;
+r_co_over_a_prime = 4/5;
+
+% Initial parameters for the search:
 a_prime = 0.2; % Initial guess for a
+v_max = 0.1; % initial guess for vmax
 
-% INITIALIZING LYAPUNOV GUESSES:
-% An initial guess:
-v_max = 0.01; 
-fact = 95/100;
-finalAngle = fact*pi;
+% INITIALIZE PARAMETERS FOR THE LINE-SEARCH
+params = [v_max, a_prime]; % The parameter line to search.
 
-muLimit = 1000;
-muFact = 10;
+% SELECT OUR MAXIMUM ROTATION RATES ACCORDING TO THE TRAJECTORY:
+rotStuff = [abs(w_body),theta_d,d']; % The angular data for the target.
 
-tol = 10^-6;
-mu = 0.1; % My weighting parameter for the perf vs. constraints.
-gamma = 0.2; % My damping factor
-beta = 0.1; % My reduction factor.
+% PICK OUR SEARCH DIRECTION FOR THE PARAMETER LINE-SEARCH:
+searchDirection = [0.1,0.0]; % Only allow v_max to vary.
 
-% The interior-point solver below is implemented in the
-% LVF_parameter_optimization folder.
+% PICK A DESIRED ACCURACY, STEP SIZE, SHRINK FACTOR.
+desiredAccuracy = 0.0001;
+stepSize = 0.001;
+stepShrinkingFactor = 0.5;
 
-v_max = interiorPointLVF_heur(...
-    a_prime, ...
-    v_max, ...
-    a_max, ...
-    w_max, ...
-    rotNorm, ...
-    dockingPortNorm, ...
-    theta_d, ...
-    fact, ...
-    W_LVF, ...
-    mu, ...
-    tol, ...
-    gamma, ...
-    beta, ...
-    muFact, ...
-    muLimit...
-);
+% SELECT NEW PARAMETERS:
+newParams = lineSearch(params, 'a_max_LVF', searchDirection, desiredAccuracy, a_max, stepSize, stepShrinkingFactor, rotStuff);    
 
-% What were our estimates?
-T_est_LVF = T_heur_LVF(a_prime,finalAngle,v_max);
-F_est_LVF = F_heur_LVF(a_prime,dockingPortNorm,finalAngle,v_max,rotNorm,w_max);
+% OUTPUT THE LYAPUNOV VECTOR FIELD PARAMETERS:
+v_max = newParams(1);
+a_prime = newParams(2);
 
-disp("LVF time estimate: " + num2str(T_est_LVF) + " seconds.")
-disp("LVF deltaV estimate: " + num2str(F_est_LVF) + " m/s.")
-                
+% Convert v_max into the gain:
+k_v_rel = 2*v_max/a_prime;
+r_co = r_co_over_a_prime*a_prime;
+                    
+
 %% CLVF DESIGN PROCEDURE
-% PERFORMING THE DESIGN PROCEDURE OF THE THREE GAINS TO SELECT:
 
-aTimesOVec = SpacecraftStructure.d + a_prime*SpacecraftStructure.o_hat_prime;
-a = sqrt(sum(aTimesOVec.^2));
-o_hat_B = aTimesOVec./a;
+        % FIRST, we'll take the a_dock and o_dock (both in the body-fixed
+        % frame) to create our "a" and "o_hat_B" parameters.
+            
+            aTimesOVec = d + a_prime*o_hat_prime; % All in the body-fixed frame.
+            a = sqrt(sum(aTimesOVec.^2));
+            o_hat_B = aTimesOVec./a;
 
-% INITIALIZE OUR PARAMETERS FOR THE SEARCH:
-b = 1.0;
-ka = 0.01;
-kc = 0.01;
-
-tol = 10^-5;
-mu = 0.1; % My weighting parameter for the perf vs. constraints.
-gamma = 0.2; % My damping factor
-beta = 0.1; % My reduction factor.
-
-muLimit = 1000;
-muFact = 10.0;
-
-% NOTE - according to my thesis work, the following rotational parameters
-% apply to a spacecraft spinning at a constant rate:
-%
-% w_max == abs(w_body)
-% rotNorm == w_body^2
-% dockingPortNorm == w_body^2 * d_norm
-
-% The interior-point solver below is implemented in the
-% CLVF_parameter_optimization folder.
-
-[b, kc, ka] = interiorPointCLVF_heur(...
-    b, ...
-    kc, ...
-    ka, ...
-    a, ...
-    a_max,... 
-    w_max, ...
-    rotNorm, ...
-    rC_T0, ...
-    vC_T0, ...
-    W_CLVF, ...
-    mu, ...
-    tol, ...
-    gamma, ...
-    beta, ...
-    muFact, ...
-    muLimit...
-);
-
-% What were our estimates?
-T_est = T_heur(a,b,ka,kc,rC_T0);
-F_est = F_heur(a,b,ka,kc,rC_T0,vC_T0,rotNorm,w_max);
-
-disp("CLVF T estimate is: " + num2str(T_est) + " seconds.");
-disp("CLVF Fuel estimate is: " + num2str(F_est) + " m/s.");
-
-disp("new ka is " + num2str(ka));
-disp("new kc is " + num2str(kc));
-disp("new b is " + num2str(b));            
+        % INITIALIZE PARAMETERS FOR THE LINE-SEARCH
+            params = [kc, ka, b, a]; % The parameter line to search.
+        
+        % SELECT OUR MAXIMUM ROTATION RATES ACCORDING TO THE TRAJECTORY:
+            rotStuff = [abs(w_body),0,0]; % The angular data for the target.
+            
+        % BEFORE DOING THE SEARCH, CHECK IF IT IS POSSIBLE:
+            disp("Our LOWEST possible:")
+            disp(a_max_CLVF2D([0,0,inf,a], rotStuff))
+            
+            if a_max_CLVF2D([0,0,inf,a], rotStuff) > a_max
+%                 error("Not a possible scenario");
+            else
+                disp("mkai...")
+            end
+        
+            
+        % PICK OUR SEARCH DIRECTION FOR THE PARAMETER LINE-SEARCH:
+            searchDirection = [0.1,0.1,-0.5,0]; % USUAL ONE!
+%             searchDirection = [0.1,0.1,0.1,0];
+%             searchDirection = [1,0,0,0];
+            
+        % PICK A DESIRED ACCURACY, STEP SIZE, SHRINK FACTOR.
+            desiredAccuracy = 0.0001;
+            stepSize = 0.001;
+            stepShrinkingFactor = 0.5;
+        
+        % SELECT NEW PARAMETERS:
+            newParams = lineSearch(params, 'a_max_CLVF2D', searchDirection, desiredAccuracy, a_max, stepSize, stepShrinkingFactor, rotStuff);
+            
+            kc = newParams(1);
+            ka = newParams(2);
+            b = newParams(3);
+            
+            disp("ka is")
+            disp(ka)
+            disp("kc is")
+            disp(kc)
+            disp("b is")
+            disp(b)
+            
 
 %%  Set the drop, initial, and home positions for each platform:
+
 
 drop_states_RED           = rT_I0; % [m; m; rad]
 drop_states_BLACK         = rC_I0;

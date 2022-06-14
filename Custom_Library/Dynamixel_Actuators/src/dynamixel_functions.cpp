@@ -582,16 +582,16 @@ void command_dynamixel_special(int JOINT1_BITS, int JOINT2_BITS, double JOINT3_P
     
 }
 
-void command_dynamixel_current(int JOINT1_BITS, int JOINT2_BITS, int JOINT3_BITS )
+void command_dynamixel_current(int JOINT1_TAU, int JOINT2_TAU, int JOINT3_TAU )
 {
     // Convert torque to amps using performance curve
-    //int JOINT1_BITS;
-    //int JOINT2_BITS;
-    //int JOINT3_BITS;
+    int JOINT1_BITS;
+    int JOINT2_BITS;
+    int JOINT3_BITS;
     
-    //JOINT1_BITS = nearbyint(JOINT1_TAU/0.0030912);
-    //JOINT2_BITS = nearbyint(JOINT2_TAU/0.0030912);
-    //JOINT3_BITS = nearbyint(JOINT3_TAU/0.0030912);
+    JOINT1_BITS = nearbyint(JOINT1_TAU/0.0030912);
+    JOINT2_BITS = nearbyint(JOINT2_TAU/0.0030912);
+    JOINT3_BITS = nearbyint(JOINT3_TAU/0.0030912);
     
     // Define the transmission failure code
     int dxl_comm_result   = COMM_TX_FAIL;

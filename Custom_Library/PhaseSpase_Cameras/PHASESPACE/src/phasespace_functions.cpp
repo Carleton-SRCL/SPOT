@@ -27,7 +27,8 @@ double initialize_phasespace(double platformSelection, double PS_SampleRate)
     std::string tracker_id_RED_3_pos_string, tracker_id_RED_5_pos_string;
     std::string tracker_id_BLACK_15_pos_string, tracker_id_BLACK_9_pos_string;
     std::string tracker_id_BLACK_11_pos_string, tracker_id_BLACK_13_pos_string;
-
+    std::string tracker_id_BLUE_16_pos_string, tracker_id_BLUE_18_pos_string;
+    std::string tracker_id_BLUE_20_pos_string, tracker_id_BLUE_22_pos_string;
     
     /* The options are sent to the phasespace computer. The most important 
        setting here is the frequency, which indicates how fast the phasespace
@@ -43,10 +44,16 @@ double initialize_phasespace(double platformSelection, double PS_SampleRate)
     tracker_id_RED_3_pos_string = "pos=144.960175,-154.081053,0";
     tracker_id_RED_1_pos_string = "pos=-133.039825,-153.581053,0";
     tracker_id_RED_7_pos_string = "pos=-131.539825,124.418947,0";
+    
     tracker_id_BLACK_13_pos_string = "pos=125.944730,153.415965,0";
     tracker_id_BLACK_11_pos_string = "pos=124.944730,-125.084035,0";
     tracker_id_BLACK_9_pos_string = "pos=-153.555270,-124.584035,0";
     tracker_id_BLACK_15_pos_string = "pos=-151.805270,154.415965,0";
+    
+    tracker_id_BLUE_16_pos_string = "pos=149.893592,142.539807,0";
+    tracker_id_BLUE_18_pos_string = "pos=-127.106408,144.039807,0";
+    tracker_id_BLUE_20_pos_string = "pos=-127.106408,-134.460193,0";
+    tracker_id_BLUE_22_pos_string = "pos=150.393592,-134.960193,0";
 
 	const std::string myoptions = phaseSpaceOptions; 
     
@@ -84,6 +91,17 @@ double initialize_phasespace(double platformSelection, double PS_SampleRate)
     owl.assignMarker(tracker_id_BLACK, 11, "11", tracker_id_BLACK_11_pos_string); // top right
     owl.assignMarker(tracker_id_BLACK, 9,  "9", tracker_id_BLACK_9_pos_string); // bottom right
     owl.assignMarker(tracker_id_BLACK, 15, "15", tracker_id_BLACK_15_pos_string); // bottom left
+    
+    uint32_t tracker_id_BLUE = 3;
+         
+    owl.createTracker(tracker_id_BLUE, "rigid", "BLUE_rigid");
+
+     /* Assign markers to the rigid body and indicate their positions
+        w.r.t the centre of mass (obtained from calibration text file) */
+    owl.assignMarker(tracker_id_BLUE, 16, "16", tracker_id_BLUE_16_pos_string); // top left
+    owl.assignMarker(tracker_id_BLUE, 22, "22", tracker_id_BLUE_22_pos_string); // top right
+    owl.assignMarker(tracker_id_BLUE, 20, "20", tracker_id_BLUE_20_pos_string); // bottom right
+    owl.assignMarker(tracker_id_BLUE, 18, "18", tracker_id_BLUE_18_pos_string); // bottom left
 
     /* Start streaming phasespace data. Sending (1) streams data using TCP/IP,
        sending (2) streams data using UDP, and sending (3) streams data using
@@ -98,7 +116,8 @@ double initialize_phasespace(double platformSelection, double PS_SampleRate)
 void stream_phasespace(double* XPOS_red, double* YPOS_red, 
         double* ATTI_red, double* XPOS_black, double* YPOS_black, double* ATTI_black,
         double* current_time, double* ElbowX, double* ElbowY, double* WristX, double* WristY,
-        double* EndEffX, double* EndEffY, double platformSelection)
+        double* EndEffX, double* EndEffY, double* XPOS_blue, double* YPOS_blue, double* ATTI_blue,
+        double platformSelection)
 {
 
         /* Initialize the "event" parameter. This parameter indicates if there is
@@ -143,6 +162,16 @@ void stream_phasespace(double* XPOS_red, double* YPOS_red,
                                         + 2 * r->pose[4] * r->pose[4]);
                                 *current_time = event->time();
                             }   
+                            else if (r->id == 3)
+                            {
+                                *XPOS_blue = r->pose[0];
+                                *YPOS_blue = r->pose[1];
+                                *ATTI_blue = atan2(2 * r->pose[4] * r->pose[5] 
+                                        + 2 * r->pose[3] * r->pose[6], 
+                                        2 * r->pose[3] * r->pose[3] - 1
+                                        + 2 * r->pose[4] * r->pose[4]);
+                                *current_time = event->time();
+                            }  
                         }
                     }
                 }

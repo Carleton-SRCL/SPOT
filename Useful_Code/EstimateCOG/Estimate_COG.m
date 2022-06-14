@@ -7,6 +7,112 @@ clc;
 close('all')
 
 % Black with panels and an air tank * USER ENTERED DATA *
+Ab = 5463/1000; % [kg] Left-middle-edge
+Bb = 3624/1000; % [kg] Right-back corner
+Cb = 2180/1000; % [kg] Right-front corner
+
+Mblue = Ab+Bb+Cb;
+
+fprintf('The total mass for blue is: %.4f kg.\n',Mblue);
+
+A_to_lineBC_distance = 0.3;
+BC_distance = 0.1778;
+
+Xblue = ((Cb-Bb)*BC_distance)/(2*Mblue);
+Yblue = 0.15-((((Bb+Cb)*A_to_lineBC_distance)/Mblue));
+
+fprintf('The XCG for blue is: %.4f m.\n',Xblue);
+fprintf('The YCG for blue is: %.4f m.\n',Yblue);
+
+figure(3);
+rectangle('Position',[-0.15 -0.15 0.3 0.3],'EdgeColor','b')
+hold on;
+grid on;
+axis([-0.2 0.2 -0.2 0.2]);
+axis square;
+scatter(Yblue, Xblue,'filled','b');
+line([0 0],[0 0.15],'Color','blue');
+set(gca,'xdir','reverse') 
+xlabel('Y - Body Frame (m)');
+ylabel('X - Body Frame (m)');
+text(0.15, 0.16, 'LED #16')
+text(-0.1, 0.16, 'LED #22')
+text(-0.1, -0.16, 'LED #20')
+text(0.15, -0.16, 'LED #18')
+
+
+% Place Black's LEDs * USER ENTERED OFFSETS
+LED16x =  0.15-Xblue-0.0115;
+LED16y =  0.15-Yblue-0.012;
+
+LED22x =  0.15-Xblue-0.011;
+LED22y =  -0.15-Yblue+0.0105;
+
+LED20x =  -0.15-Xblue+0.0115;
+LED20y =  -0.15-Yblue+0.011;
+
+LED18x =  -0.15-Xblue+0.0115;
+LED18y =  0.15-Yblue-0.0105;
+
+fprintf('\nLED #16 relative to the CG: %f mm and %f mm\n',[LED16x*1000,LED16y*1000]);
+fprintf('LED #18 relative to the CG: %f mm and %f mm\n',[LED18x*1000,LED18y*1000]);
+fprintf('LED #20 relative to the CG: %f mm and %f mm\n',[LED20x*1000,LED20y*1000]);
+fprintf('LED #22 relative to the CG: %f mm and %f mm\n',[LED22x*1000,LED22y*1000]);
+
+scatter((LED16x+Xblue), (LED16y+Yblue), 'filled','b');
+scatter(-(LED22x+Xblue), -(LED22y+Yblue), 'filled','o');
+scatter(-(LED18x+Xblue),-(LED18y+Yblue), 'filled','m');
+scatter((LED20x+Xblue),(LED20y+Yblue), 'filled','g');
+
+set(gca,'FontSize',12,'FontName','Times');  
+width = 4;                                                                            
+height = 4;                                                                         
+pos = get(gcf, 'Position');                                               
+set(gcf, 'Position', [pos(1) pos(2) width*100, height*100]); 
+set(gcf, 'Paperposition', [0 0 width height])        
+set(gcf,'papersize',[width height])                            
+print('CG_BLUE','-dpdf','-r700'); 
+
+
+
+
+% Calculate the thruster locations relative to the CG:
+Thr1B = 0.15-0.081-Yblue;
+Thr2B = -(0.15-0.081+Yblue);
+Thr3B = 0.15-0.080-Xblue;
+Thr4B = -(0.15-0.0785+Xblue);
+Thr5B = 0.15-0.081+Yblue;
+Thr6B = -(0.15-0.0886-Yblue);
+Thr7B = 0.15-0.084+Xblue;
+Thr8B = -(0.15-0.087-Xblue);
+
+
+thruster_dist2CG_BLUE  = [ Thr1B
+                           Thr2B
+                           Thr3B
+                           Thr4B
+                           Thr5B
+                           Thr6B
+                           Thr7B
+                           Thr8B ].*1000;
+
+% Calculating Black's inertia using the bifilar pendulum * USER ENTERED VALUES
+tauB = 3; % [s] period of oscillation
+distance_between_cords_black = 0.28; % [m]
+length_of_cord_black = 2.41805; % [m]
+
+inertia_blue_bifilar = tauB^2 * Mblue * 9.81 * distance_between_cords_black^2 / (16*pi^2 * length_of_cord_black);
+fprintf('\nBlue bifilar estimate of moment of inertia is %f kg m^2\n',inertia_blue_bifilar);
+
+% Calculating the docking port location with respect to the centre of mass * USER ENTERED DATA *
+docking_port_x = 0.15-Xblue-0.0675;
+docking_port_y = 0.15-Yblue+0.075;
+
+fprintf('\nBlue''s docking port is %.4f m in X and %.4f m in Y from its centre of mass.\n', [docking_port_x,docking_port_y]);
+
+% Blue complete, black next
+
+% Black with panels and an air tank * USER ENTERED DATA *
 Ab = 5867/1000; % [kg] Left-middle-edge
 Bb = 2755/1000; % [kg] Right-back corner
 Cb = 3417/1000; % [kg] Right-front corner
@@ -105,7 +211,7 @@ fprintf('\nBlack bifilar estimate of moment of inertia is %f kg m^2\n',inertia_b
 % Calculating the docking port location with respect to the centre of mass * USER ENTERED DATA *
 docking_port_x = 0.15-Xb-0.0675;
 docking_port_y = 0.15-Yb+0.075;
-
+ 
 fprintf('\nBlack''s docking port is %.4f m in X and %.4f m in Y from its centre of mass.\n', [docking_port_x,docking_port_y]);
                        
 % Black complete; Red next
@@ -317,7 +423,11 @@ fprintf('model_param(1)                 = %f; %% RED Mass\n', Mr)
 fprintf('model_param(2)                 = %f; %% RED Inertia\n', inertia_red_bifilar)
 fprintf('model_param(3)                 = %f; %% BLACK Mass\n', Mb)
 fprintf('model_param(4)                 = %f; %% BLACK Inertia\n', inertia_black_bifilar)
+fprintf('model_param(5)                 = %f; %% BLUE Mass\n', Mblue)
+fprintf('model_param(6)                 = %f; %% BLUE Inertia\n', inertia_blue_bifilar)
+
 
 fprintf('\nAND\n');
 fprintf('thruster_dist2CG_RED          = [%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f];\n',thruster_dist2CG_RED)
 fprintf('thruster_dist2CG_BLACK        = [%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f];\n',thruster_dist2CG_BLACK)
+fprintf('thruster_dist2CG_BLUE        = [%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f];\n',thruster_dist2CG_BLUE)

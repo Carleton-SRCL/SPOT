@@ -94,18 +94,9 @@ noise_variance_BLUE            = 0;
 % the frequency of the template changes, the frequency of the server must
 % also be changed, i.e. open the StreamData.sln under the PhaseSpace Server
 % folder, and change line 204 from owl.frequency(10) to 
-% owl.frequency(serverRate):
+% owl.frequency(serverRate).:
 
 baseRate                       = 0.05;      % 20 Hz
-
-%% Set the frequency that the data is being sent up from the PhaseSpace:
-
-% This variable must be less then the baseRate; in simulation, setting this
-% equal to the baseRate causes the simulation fail, while in experiment
-% setting this equal to or higher then the baseRate causes the data to
-% buffer in the UDP send.
-
-serverRate                     = 0.1;       % 10 Hz
 
 %% Set the duration of each major phase in the experiment, in seconds:
 

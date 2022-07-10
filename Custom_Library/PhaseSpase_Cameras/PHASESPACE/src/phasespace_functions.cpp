@@ -18,7 +18,7 @@ OWL::Rigids rigids;
 
 /* initialize_phasespace() initializes the options for the phasespace cameras
    and starts streaming data. */
-double initialize_phasespace(double platformSelection, double PS_SampleRate)
+double initialize_phasespace(double PS_SampleRate)
 {
     /* The address is the IP address for the phasespace computer. */
     string address = "192.168.0.109";
@@ -116,8 +116,7 @@ double initialize_phasespace(double platformSelection, double PS_SampleRate)
 void stream_phasespace(double* XPOS_red, double* YPOS_red, 
         double* ATTI_red, double* XPOS_black, double* YPOS_black, double* ATTI_black,
         double* current_time, double* ElbowX, double* ElbowY, double* WristX, double* WristY,
-        double* EndEffX, double* EndEffY, double* XPOS_blue, double* YPOS_blue, double* ATTI_blue,
-        double platformSelection)
+        double* EndEffX, double* EndEffY, double* XPOS_blue, double* YPOS_blue, double* ATTI_blue)
 {
 
         /* Initialize the "event" parameter. This parameter indicates if there is

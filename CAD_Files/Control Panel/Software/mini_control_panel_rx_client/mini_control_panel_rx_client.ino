@@ -13,8 +13,8 @@ float time_out = 5; // time out [seconds] how long to wait if no signal is recei
 int start = 0;
 int bat;
 const int pulse_time = 5000;// how many milliseconds to pulse red LED when no signal is received. should equal time_out
-const int low_batt_value = 492;// 23.8 V on the battery
-const int critical_battery = 483; // corresponds to 23.3 V on battery (MUST CHARGE BATTERY)
+const int low_batt_value = 480;// 23.8 V on the battery
+const int critical_battery = 471; // corresponds to 23.3 V on battery (MUST CHARGE BATTERY)
 
 void setup()
 {

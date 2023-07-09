@@ -1,3 +1,4 @@
 #include "rtwtypes.h"
 
-double whoAmI();
+int WhoAmI();
+int getComputerIdentifier(const char* hostname);

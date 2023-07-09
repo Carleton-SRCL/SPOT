@@ -47,7 +47,7 @@ classdef ReadArm_Position_Rates < realtime.internal.SourceSampleTime ...
             end
         end
         
-        function [theta1, theta2, theta3, omega1, omega2, omega3] = stepImpl(obj)
+        function [theta1, theta2, theta3, omega1, omega2, omega3] = stepImpl(obj, u1, u2, u3)
             
             theta1  = double(0);
             theta2  = double(0);
@@ -64,7 +64,7 @@ classdef ReadArm_Position_Rates < realtime.internal.SourceSampleTime ...
                 coder.cinclude('dynamixel_functions.h');
                 coder.ceval('read_dynamixel_position',coder.ref(theta1),...
                              coder.ref(theta2),coder.ref(theta3),coder.ref(omega1),...
-                             coder.ref(omega2),coder.ref(omega3));
+                             coder.ref(omega2),coder.ref(omega3), u1, u2, u3);
 
             end
         end
@@ -73,17 +73,39 @@ classdef ReadArm_Position_Rates < realtime.internal.SourceSampleTime ...
             if isempty(coder.target)
                 % Place simulation termination code here
             else
-                % Call C-function implementing device termination
             end
         end
     end
     
     methods (Access=protected)
-        %% Define output properties
+
+        %% Define input properties
         function num = getNumInputsImpl(~)
-            num = 0;
+            num = 3;
+        end
+                
+        function flag = isInputSizeLockedImpl(~,~)
+            flag = true;
         end
         
+        function varargout = isInputFixedSizeImpl(~,~)
+            varargout{1} = true;
+        end
+        
+        function flag = isInputComplexityLockedImpl(~,~)
+            flag = true;
+        end
+        
+        function validateInputsImpl(~, u1, u2, u3)
+            if isempty(coder.target)
+                % Run input validation only in Simulation
+                validateattributes(u1,{'double'},{'scalar'},'','u1');
+                validateattributes(u2,{'double'},{'scalar'},'','u2');
+                validateattributes(u3,{'double'},{'scalar'},'','u3');
+            end
+        end
+        
+        %% Define output properties
         function num = getNumOutputsImpl(~)
             num = 6;
         end

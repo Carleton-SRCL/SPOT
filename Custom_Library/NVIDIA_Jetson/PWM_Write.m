@@ -1,4 +1,4 @@
-classdef GPIO_Write < matlab.System & coder.ExternalDependency
+classdef PWM_Write < matlab.System & coder.ExternalDependency
     %
     % System object template for a GPIO_Write block.
     % 
@@ -13,8 +13,6 @@ classdef GPIO_Write < matlab.System & coder.ExternalDependency
     
     properties
         % Specify custom variable names
-        gpioPin = 428; 
-        pinDirection = 1;
 
     end 
     
@@ -24,43 +22,39 @@ classdef GPIO_Write < matlab.System & coder.ExternalDependency
     
     methods
         % Constructor
-        function obj = GPIO_Write(varargin)
+        function obj = PWM_Write(varargin)
             % Support name-value pair arguments when constructing the object.
             setProperties(obj,nargin,varargin{:});
         end
     end
-    
+
     methods (Access=protected)
-        function setupImpl(obj) 
+        function setupImpl(obj) %#ok<MANU>
             if isempty(coder.target)
-                % Place simulation setup code here
+                % Simulation setup code
             else
-                % Call C-function implementing device initialization
-                coder.cinclude('gpio_control.h');
-                coder.ceval('export_gpio', obj.gpioPin);
-                coder.ceval('set_pin_direction', obj.gpioPin, obj.pinDirection);
+                coder.cinclude('pca9685_controller.h');
+                coder.ceval('initPCA9685');
             end
         end
         
-        function stepImpl(obj, u)  
+        function stepImpl(obj, u1,u2,u3,u4,u5,u6,u7,u8)
             if isempty(coder.target)
-                % Place simulation output code here 
+                % Simulation output code
             else
-                % Call C-function implementing device output
-                coder.cinclude('gpio_control.h');
-                %coder.ceval('export_gpio', obj.gpioPin);
-                coder.ceval('set_pin_direction', obj.gpioPin, obj.pinDirection);
-                coder.ceval('change_gpio_value', obj.gpioPin, u);
+                coder.cinclude('pca9685_controller.h');
+                coder.ceval('commandPWM', u1, u2, u3, u4, u5, u6, u7, u8);
             end
         end
         
-        function releaseImpl(obj)
+        function releaseImpl(obj) %#ok<MANU>
             if isempty(coder.target)
-                % Place simulation termination code here
+                % Simulation termination code
             else
-                % Call C-function implementing device termination
-                coder.ceval('change_gpio_value', obj.gpioPin, 0);
-                coder.ceval('unexport_gpio', obj.gpioPin);
+                % Termination code for PCA9685
+                coder.cinclude('pca9685_controller.h');
+                coder.ceval('commandPWM', 0, 0, 0, 0, 0, 0, 0, 0);
+                coder.ceval('closePCA9685');
             end
         end
     end
@@ -68,7 +62,7 @@ classdef GPIO_Write < matlab.System & coder.ExternalDependency
     methods (Access=protected)
         %% Define input properties
         function num = getNumInputsImpl(~)
-            num = 1;
+            num = 8;
         end
         
         function num = getNumOutputsImpl(~)
@@ -92,7 +86,7 @@ classdef GPIO_Write < matlab.System & coder.ExternalDependency
         
         function icon = getIconImpl(~)
             % Define a string as the icon for the System block in Simulink.
-            icon = 'GPIO_Write';
+            icon = 'PWM_Write';
         end
     end
     
@@ -108,41 +102,29 @@ classdef GPIO_Write < matlab.System & coder.ExternalDependency
         function header = getHeaderImpl
             header = matlab.system.display.Header('GPIO_Write','Title',...
                 'Debugging Block','Text',...
-                ['This block allows you to control the GPIO pins on the NVIDIA Jetson Xavier NX Development board.' ...
-                ' It is important to be aware that the pin numbers needed for this block do not correspond to the pin numbers used in most'...
-                ' online resources. Here is the list of pin numbers and what they control:' newline newline ...
-                '445: Thruster #1' newline...
-                '480: Thruster #2' newline...
-                '268: Thruster #3' newline...
-                '436: Thruster #4' newline...
-                '483: Thruster #5' newline...
-                '493: Thruster #6' newline...
-                '492: Thruster #7' newline...
-                '481: Thruster #8' newline...
-                '428: Pucks' newline newline ... 
-                'For a complete list of all GPIO pin numbers available and their alternate functions, refer to this online resource:' newline newline ...
-                'https://jetsonhacks.com/nvidia-jetson-xavier-nx-gpio-header-pinout/']);
+                ['This block allows you to control the PWM pins on the PCA9685 board via I2C.' ...
+                ' The inputs are the duty cycle commands for thrusters 1-8 in order (input #1 is thruster #1).']);
         end
         
     end
     
     methods (Static)
         function name = getDescriptiveName()
-            name = 'GPIO_Write';
+            name = 'PWM_Write';
         end
-
+        
         function b = isSupportedContext(context)
             b = context.isCodeGenTarget('rtw');
         end
         
         function updateBuildInfo(buildInfo, context)
             if context.isCodeGenTarget('rtw')
-                % Update buildInfo
                 srcDir = fullfile(fileparts(mfilename('fullpath')),'src');
                 includeDir = fullfile(fileparts(mfilename('fullpath')),'include');
-                addIncludePaths(buildInfo, includeDir);
-                addSourceFiles(buildInfo, 'gpio_control.cpp', srcDir);
-                addIncludeFiles(buildInfo, 'gpio_control.h', includeDir);
+                addIncludePaths(buildInfo,includeDir);
+                % Add the source and header files to the build
+                addIncludeFiles(buildInfo,'pca9685_controller.h',includeDir);
+                addSourceFiles(buildInfo,'pca9685_controller.cpp',srcDir); % Assuming .cpp extension
             end
         end
     end

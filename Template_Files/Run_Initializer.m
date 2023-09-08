@@ -71,3 +71,6 @@ Gamma3_wr = 40;
 Gamma4_wr = 0.029;
 Gamma5_wr = 800; 
 Gamma6_wr = 0.02;
+
+% Set the PWM frequency
+PWMFreq = 5; %[Hz]

@@ -141,8 +141,6 @@ int main(int argc, const char **argv)
   OWL::Markers markers;
   OWL::Rigids rigids;
 
-  if(owl.open(address) <= 0 || owl.initialize() <= 0) return 0;
-
   std::string phaseSpaceOptions;
   std::string tracker_id_RED_7_pos_string, tracker_id_RED_1_pos_string;
   std::string tracker_id_RED_3_pos_string, tracker_id_RED_5_pos_string;
@@ -150,7 +148,7 @@ int main(int argc, const char **argv)
   std::string tracker_id_BLACK_25_pos_string, tracker_id_BLACK_31_pos_string;
   std::string tracker_id_BLUE_8_pos_string, tracker_id_BLUE_14_pos_string;
   std::string tracker_id_BLUE_12_pos_string, tracker_id_BLUE_10_pos_string;
-  phaseSpaceOptions = "profile=all120";
+  phaseSpaceOptions = "profile=default";
 
   std::unordered_map<std::string, std::string> tracker_positions;
 
@@ -206,6 +204,9 @@ int main(int argc, const char **argv)
 
   const std::string myoptions = phaseSpaceOptions;
 
+
+  if (owl.open(address) <= 0 || owl.initialize() <= 0) return 0;
+
   uint32_t tracker_id_RED = 0;
   owl.createTracker(tracker_id_RED, "rigid", "RED_rigid");
 
@@ -221,10 +222,10 @@ int main(int argc, const char **argv)
 
   /* Assign markers to the rigid body and indicate their positions
 	 w.r.t the centre of mass (obtained from calibration text file) */
-  owl.assignMarker(tracker_id_BLACK, 29, "29", tracker_id_BLACK_29_pos_string); // top left
-  owl.assignMarker(tracker_id_BLACK, 27, "27", tracker_id_BLACK_27_pos_string); // top right
-  owl.assignMarker(tracker_id_BLACK, 25, "25", tracker_id_BLACK_25_pos_string); // bottom right
-  owl.assignMarker(tracker_id_BLACK, 31, "31", tracker_id_BLACK_31_pos_string); // bottom left
+  owl.assignMarker(tracker_id_BLACK, 13, "5", tracker_id_BLACK_29_pos_string); // top left
+  owl.assignMarker(tracker_id_BLACK, 11, "3", tracker_id_BLACK_27_pos_string); // top right
+  owl.assignMarker(tracker_id_BLACK, 9, "1", tracker_id_BLACK_25_pos_string); // bottom right
+  owl.assignMarker(tracker_id_BLACK, 15, "7", tracker_id_BLACK_31_pos_string); // bottom left
 
   uint32_t tracker_id_BLUE = 3;
 
@@ -236,7 +237,8 @@ int main(int argc, const char **argv)
   owl.assignMarker(tracker_id_BLUE, 14, "14", tracker_id_BLUE_14_pos_string); // top right
   owl.assignMarker(tracker_id_BLUE, 12, "12", tracker_id_BLUE_12_pos_string); // bottom right
   owl.assignMarker(tracker_id_BLUE, 10, "10", tracker_id_BLUE_10_pos_string); // bottom left
-  
+ 
+
   int frequency = atoi(argv[1]); // convert first argument to integer
   owl.frequency(frequency);
 
@@ -271,6 +273,9 @@ int main(int argc, const char **argv)
 
                       if (r->id == 0)
                       {
+
+                          
+                          
                           // Assume prevRawAngle0 and accumulatedAngle0 are declared and initialized elsewhere
                           static double prevRawAngle0 = 0.0;
                           static double accumulatedAngle0 = 0.0;
@@ -301,6 +306,8 @@ int main(int argc, const char **argv)
 
                           // Store the accumulated angle in the data packet
                           dataPacket[3] = accumulatedAngle0;
+
+                          //std::cout << dataPacket[1] << std::endl;
                       }
                       else if (r->id == 2)
                       {
@@ -371,6 +378,8 @@ int main(int argc, const char **argv)
 				  }
 			  }
 		  }
+
+          
 
 		  // send dataPacket array to wireless computer
 		  for (const auto& address : client_addresses) {

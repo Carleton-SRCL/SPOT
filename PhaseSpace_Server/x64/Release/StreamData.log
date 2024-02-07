@@ -1,0 +1,70 @@
+﻿  StreamData.cc
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(117,17): warning C4251: 'OWL::MarkerInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::MarkerInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(118,17): warning C4251: 'OWL::MarkerInfo::options': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::MarkerInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(126,17): warning C4251: 'OWL::TrackerInfo::type': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::TrackerInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(127,17): warning C4251: 'OWL::TrackerInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::TrackerInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(128,17): warning C4251: 'OWL::TrackerInfo::options': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::TrackerInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(129,27): warning C4251: 'OWL::TrackerInfo::marker_ids': class 'std::vector<uint32_t,std::allocator<uint32_t>>' needs to have dll-interface to be used by clients of struct 'OWL::TrackerInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(129,10):
+  see declaration of 'std::vector<uint32_t,std::allocator<uint32_t>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(142,17): warning C4251: 'OWL::FilterInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::FilterInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(143,17): warning C4251: 'OWL::FilterInfo::options': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::FilterInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(153,17): warning C4251: 'OWL::DeviceInfo::type': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::DeviceInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(154,17): warning C4251: 'OWL::DeviceInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::DeviceInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(155,17): warning C4251: 'OWL::DeviceInfo::options': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::DeviceInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(156,17): warning C4251: 'OWL::DeviceInfo::status': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::DeviceInfo'
+  (compiling source file 'StreamData.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(243,17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244: '=': conversion from '_Rep' to 'double', possible loss of data
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244:         with
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244:         [
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244:             _Rep=__int64
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244:         ]
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(386,36): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
+  StreamData.vcxproj -> C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\x64\Release\StreamData.exe

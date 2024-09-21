@@ -59,12 +59,12 @@ C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\owl.hpp(1
   C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
   see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
   
-C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(243,17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244: '=': conversion from '_Rep' to 'double', possible loss of data
-C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244:         with
-C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244:         [
-C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244:             _Rep=__int64
-C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(271,86): warning C4244:         ]
-C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(386,36): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(248,17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(276,86): warning C4244: '=': conversion from '_Rep' to 'double', possible loss of data
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(276,86): warning C4244:         with
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(276,86): warning C4244:         [
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(276,86): warning C4244:             _Rep=__int64
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(276,86): warning C4244:         ]
+C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\StreamData.cc(391,36): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
   StreamData.vcxproj -> C:\Users\SPOT\Documents\GitHub\AlexCrain-SPOT-Xavier\PhaseSpace_Server\x64\Release\StreamData.exe

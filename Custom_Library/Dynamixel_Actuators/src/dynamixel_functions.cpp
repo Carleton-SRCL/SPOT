@@ -117,7 +117,7 @@ void initialize_dynamixel()
         
         dxl_comm_result   = packetHandler->write1ByteTxRx(portHandler, 3, ADDR_MX_OPERATING_MODE, 3, &dxl_error);
         dxl_comm_result   = packetHandler->write1ByteTxRx(portHandler, 3, ADDR_MX_DRIVE_MODE, 4, &dxl_error); // Velocity_profile yields the time required to reach goal position
-        dxl_comm_result   = packetHandler->write2ByteTxRx(portHandler, 3, ADDR_MX_POSITION_P_GAIN, POSITION_P_GAIN, &dxl_error);
+        dxl_comm_result   = packetHandler->write2ByteTxRx(portHandler, 3, ADDR_MX_POSITION_P_GAIN, POSITION_P_GAIN, &dxl_error); // Manually set to 800 for the combined experiment!!!
         dxl_comm_result   = packetHandler->write2ByteTxRx(portHandler, 3, ADDR_MX_POSITION_I_GAIN, POSITION_I_GAIN, &dxl_error);
         dxl_comm_result   = packetHandler->write2ByteTxRx(portHandler, 3, ADDR_MX_POSITION_D_GAIN, POSITION_D_GAIN, &dxl_error);
         dxl_comm_result   = packetHandler->write4ByteTxRx(portHandler, 3, ADDR_MX_MAX_POSITION, MAX_POSITION, &dxl_error);

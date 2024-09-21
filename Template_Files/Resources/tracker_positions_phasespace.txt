@@ -1,7 +1,7 @@
-tracker_id_RED_5_pos_string,142.164291,161.129636,0
-tracker_id_RED_3_pos_string,142.164291,-118.370364,0
-tracker_id_RED_1_pos_string,-138.335709,-118.370364,0
-tracker_id_RED_7_pos_string,-136.835709,161.629636,0
+tracker_id_RED_5_pos_string,159.129636,135.335709,0
+tracker_id_RED_3_pos_string,160.629636,-142.164291,0
+tracker_id_RED_1_pos_string,-116.370364,-140.164291,0
+tracker_id_RED_7_pos_string,-117.370364,137.835709,0
 tracker_id_BLACK_29_pos_string,136.334888,156.205422,0
 tracker_id_BLACK_27_pos_string,136.834888,-121.294578,0
 tracker_id_BLACK_25_pos_string,-140.665112,-120.794578,0

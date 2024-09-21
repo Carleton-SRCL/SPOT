@@ -84,6 +84,11 @@ int main(int argc, const char **argv)
   /* Open a datagram socket */
   sd = socket(AF_INET, SOCK_DGRAM, 0);
 
+  // Set the buffer size
+  int bufferSize = 8192; // Example size, adjust as necessary
+  setsockopt(sd, SOL_SOCKET, SO_RCVBUF, (char*)&bufferSize, sizeof(bufferSize));
+  setsockopt(sd, SOL_SOCKET, SO_SNDBUF, (char*)&bufferSize, sizeof(bufferSize));
+
   u_long mode = 1;  
   ioctlsocket(sd, FIONBIO, &mode); 
 
@@ -148,7 +153,7 @@ int main(int argc, const char **argv)
   std::string tracker_id_BLACK_25_pos_string, tracker_id_BLACK_31_pos_string;
   std::string tracker_id_BLUE_8_pos_string, tracker_id_BLUE_14_pos_string;
   std::string tracker_id_BLUE_12_pos_string, tracker_id_BLUE_10_pos_string;
-  phaseSpaceOptions = "profile=all120";
+  phaseSpaceOptions = "profile=default";
 
   std::unordered_map<std::string, std::string> tracker_positions;
 
@@ -214,7 +219,7 @@ int main(int argc, const char **argv)
 	 w.r.t the centre of mass (obtained from calibration text file) */
   owl.assignMarker(tracker_id_RED, 5, "5", tracker_id_RED_5_pos_string); // top left
   owl.assignMarker(tracker_id_RED, 3, "3", tracker_id_RED_3_pos_string); // top right
-  owl.assignMarker(tracker_id_RED,  1, "1", tracker_id_RED_1_pos_string); // bottom right
+  owl.assignMarker(tracker_id_RED, 1, "1", tracker_id_RED_1_pos_string); // bottom right
   owl.assignMarker(tracker_id_RED, 7, "7", tracker_id_RED_7_pos_string); // bottom left 
 
   uint32_t tracker_id_BLACK = 2;
@@ -222,10 +227,10 @@ int main(int argc, const char **argv)
 
   /* Assign markers to the rigid body and indicate their positions
 	 w.r.t the centre of mass (obtained from calibration text file) */
-  owl.assignMarker(tracker_id_BLACK,  13, "13", tracker_id_BLACK_29_pos_string); // top left
-  owl.assignMarker(tracker_id_BLACK,  11, "11", tracker_id_BLACK_27_pos_string); // top right
-  owl.assignMarker(tracker_id_BLACK,  9, "9", tracker_id_BLACK_25_pos_string); // bottom right
-  owl.assignMarker(tracker_id_BLACK,  15, "15", tracker_id_BLACK_31_pos_string); // bottom left
+  owl.assignMarker(tracker_id_BLACK, 13, "5", tracker_id_BLACK_29_pos_string); // top left
+  owl.assignMarker(tracker_id_BLACK, 11, "3", tracker_id_BLACK_27_pos_string); // top right
+  owl.assignMarker(tracker_id_BLACK, 9, "1", tracker_id_BLACK_25_pos_string); // bottom right
+  owl.assignMarker(tracker_id_BLACK, 15, "7", tracker_id_BLACK_31_pos_string); // bottom left
 
   uint32_t tracker_id_BLUE = 3;
 
@@ -379,7 +384,7 @@ int main(int argc, const char **argv)
 			  }
 		  }
 
-          
+          //std::cout << dataPacket[0] << std::endl;
 
 		  // send dataPacket array to wireless computer
 		  for (const auto& address : client_addresses) {

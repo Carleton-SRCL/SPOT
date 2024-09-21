@@ -1,0 +1,152 @@
+﻿  auto_calibration.cc
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(104,17): warning C4251: 'OWL::MarkerInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::MarkerInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(105,17): warning C4251: 'OWL::MarkerInfo::options': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::MarkerInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(113,17): warning C4251: 'OWL::TrackerInfo::type': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::TrackerInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(114,17): warning C4251: 'OWL::TrackerInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::TrackerInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(115,17): warning C4251: 'OWL::TrackerInfo::options': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::TrackerInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(116,27): warning C4251: 'OWL::TrackerInfo::marker_ids': class 'std::vector<uint32_t,std::allocator<uint32_t>>' needs to have dll-interface to be used by clients of struct 'OWL::TrackerInfo'
+  (compiling source file 'auto_calibration.cc')
+  D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(116,10):
+  see declaration of 'std::vector<uint32_t,std::allocator<uint32_t>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(127,17): warning C4251: 'OWL::FilterInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::FilterInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(128,17): warning C4251: 'OWL::FilterInfo::options': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::FilterInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(137,17): warning C4251: 'OWL::DeviceInfo::type': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::DeviceInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(138,17): warning C4251: 'OWL::DeviceInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::DeviceInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(139,17): warning C4251: 'OWL::DeviceInfo::options': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::DeviceInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(140,17): warning C4251: 'OWL::DeviceInfo::status': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'OWL::DeviceInfo'
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(5127,29):
+  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+  
+D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(412,3): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+  (compiling source file 'auto_calibration.cc')
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244: 'initializing': conversion from 'const int' to '_Objty', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244:             _Objty=float
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244:         ]
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82):
+  the template instantiation context (the oldest one first) is
+  	D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(414,3):
+  	see reference to function template instantiation 'std::vector<float,std::allocator<float>>::vector<const int*,0>(_Iter,_Iter,const _Alloc &)' being compiled
+          with
+          [
+              _Iter=const int *,
+              _Alloc=std::allocator<float>
+          ]
+  		D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(414,3):
+  		see the first reference to 'std::vector<float,std::allocator<float>>::vector' in 'OWL::Variant::operator std::vector<float,std::allocator<float>>'
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(635,13):
+  	see reference to function template instantiation 'void std::vector<float,std::allocator<float>>::_Construct_n<const int*,const int*>(const unsigned int,const int *&&,const int *&&)' being compiled
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(2082,36):
+  	see reference to function template instantiation 'float *std::_Uninitialized_copy<_Ty,_Ty,std::allocator<float>>(_InIt,_Se,float *,_Alloc &)' being compiled
+          with
+          [
+              _Ty=const int *,
+              _InIt=const int *,
+              _Se=const int *,
+              _Alloc=std::allocator<float>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(1855,17):
+  	see reference to function template instantiation 'void std::_Uninitialized_backout_al<_Alloc>::_Emplace_back<const int&>(const int &)' being compiled
+          with
+          [
+              _Alloc=std::allocator<float>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(1801,35):
+  	see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,const int&>(_Alloc &,_Objty *const ,const int &)' being compiled
+          with
+          [
+              _Alloc=std::allocator<float>,
+              _Ty=float,
+              _Objty=float
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244: 'initializing': conversion from 'const float' to '_Objty', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244:             _Objty=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82): warning C4244:         ]
+  (compiling source file 'auto_calibration.cc')
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(723,82):
+  the template instantiation context (the oldest one first) is
+  	D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(415,3):
+  	see reference to function template instantiation 'std::vector<int,std::allocator<int>>::vector<const float*,0>(_Iter,_Iter,const _Alloc &)' being compiled
+          with
+          [
+              _Iter=const float *,
+              _Alloc=std::allocator<int>
+          ]
+  		D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\owl.hpp(415,3):
+  		see the first reference to 'std::vector<int,std::allocator<int>>::vector' in 'OWL::Variant::operator std::vector<int,std::allocator<int>>'
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(635,13):
+  	see reference to function template instantiation 'void std::vector<int,std::allocator<int>>::_Construct_n<const float*,const float*>(const unsigned int,const float *&&,const float *&&)' being compiled
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(2082,36):
+  	see reference to function template instantiation 'int *std::_Uninitialized_copy<_Ty,_Ty,std::allocator<int>>(_InIt,_Se,int *,_Alloc &)' being compiled
+          with
+          [
+              _Ty=const float *,
+              _InIt=const float *,
+              _Se=const float *,
+              _Alloc=std::allocator<int>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(1855,17):
+  	see reference to function template instantiation 'void std::_Uninitialized_backout_al<_Alloc>::_Emplace_back<const float&>(const float &)' being compiled
+          with
+          [
+              _Alloc=std::allocator<int>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(1801,35):
+  	see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,const float&>(_Alloc &,_Objty *const ,const float &)' being compiled
+          with
+          [
+              _Alloc=std::allocator<int>,
+              _Ty=int,
+              _Objty=int
+          ]
+  
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
+  auto_calibration.vcxproj -> D:\SPOT_Archive\Documents Folder 2024-05-16\outdated_SPOT_SVN\Subsystems\Ground Station\SW\autoCalibration\Release\auto_calibration.exe

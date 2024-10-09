@@ -86,7 +86,10 @@ BLUEFYNominal  = 0.2825;
 
 %% For those who want to run simulations without using the GUI:
 
-% % Set the diagram to run
+% % Load previous GUI states using this public facing function
+% appHandle.LoadDataPublicFcn(cd,'SampleGUIState.mat');
+%
+% % Set the diagram to run (must be set again after each load)
 % appHandle.AvailableDiagramsDropDown.Value = "Template_v4_1_0_2024b_Jetson.slx";
 % 
 % % Ensure the diagram is loaded
@@ -115,15 +118,15 @@ BLUEFYNominal  = 0.2825;
 % appHandle.SubAppMassProperties.UpdateMassProperties();
 % 
 % % Edit phase durations
-% appHandle.SubPhase1EditField.Value = 10;        % [s]
+% appHandle.SubPhase1EditField.Value = 10;       % [s]
 % appHandle.SubPhase2EditField.Value = 5;        % [s]
-% appHandle.SubPhase3EditField.Value = 28;        % [s]
-% appHandle.SubPhase4EditField.Value = 115;        % [s]
-% appHandle.DurPhase0EditField.Value = 10;                  % [s]
-% appHandle.DurPhase1EditField.Value = 5;                  % [s]
-% appHandle.DurPhase2EditField.Value = 40;                  % [s]
-% appHandle.DurPhase4EditField.Value = 30;                  % [s]
-% appHandle.DurPhase5EditField.Value = 20;                  % [s] 
+% appHandle.SubPhase3EditField.Value = 28;       % [s]
+% appHandle.SubPhase4EditField.Value = 115;      % [s]
+% appHandle.DurPhase0EditField.Value = 10;       % [s]
+% appHandle.DurPhase1EditField.Value = 5;        % [s]
+% appHandle.DurPhase2EditField.Value = 40;       % [s]
+% appHandle.DurPhase4EditField.Value = 30;       % [s]
+% appHandle.DurPhase5EditField.Value = 20;       % [s] 
 % 
 % appHandle.UpdateTimes();
 % 

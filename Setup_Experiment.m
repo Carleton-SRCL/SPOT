@@ -16,7 +16,7 @@ function [] = Setup_Experiment()
     
         cd([cd filesep 'Projects' filesep expName{1,1}]);
     
-        movefile('Template_v4_1_0_2024b_Jetson.slx',[expName{1,1} '.slx']);
+        movefile('Template_v5_0_0_2024b_Jetson.slx',[expName{1,1} '.slx']);
     end
 
 end

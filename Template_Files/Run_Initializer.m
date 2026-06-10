@@ -11,7 +11,7 @@ warning('off','all')
 %% Start the graphical user interface or set the appropriate variables:
 
 % No matter what, the GUI needs to be loaded
-appHandle = GUI_v4_1_Main;
+appHandle = GUI_v5_0_Main;
 
 %% Place any custom variables or overwriting variables in this section
 
@@ -136,7 +136,7 @@ appHandle.registerCustomDrawing("Circle", @drawCircle, @patch, ...
 % appHandle.LoadDataPublicFcn(cd,'SampleGUIState.mat');
 %
 % % Set the diagram to run (must be set again after each load)
-% appHandle.AvailableDiagramsDropDown.Value = "Template_v4_1_0_2024b_Jetson.slx";
+% appHandle.AvailableDiagramsDropDown.Value = "Template_v5_0_0_Jetson.slx";
 % 
 % % Ensure the diagram is loaded
 % open(appHandle.AvailableDiagramsDropDown.Value);

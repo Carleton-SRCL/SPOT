@@ -165,8 +165,8 @@ int main(int argc, const char **argv)
     OWL::Rigids rigids;
 
     std::string phaseSpaceOptions;
-    std::string tracker_id_RED_0_pos_string, tracker_id_RED_6_pos_string;
-    std::string tracker_id_RED_4_pos_string, tracker_id_RED_2_pos_string;
+    std::string tracker_id_RED_5_pos_string, tracker_id_RED_3_pos_string;
+    std::string tracker_id_RED_7_pos_string, tracker_id_RED_4_pos_string;
     std::string tracker_id_BLACK_13_pos_string, tracker_id_BLACK_11_pos_string;
     std::string tracker_id_BLACK_9_pos_string, tracker_id_BLACK_15_pos_string;
     std::string tracker_id_BLUE_8_pos_string, tracker_id_BLUE_14_pos_string;
@@ -176,10 +176,10 @@ int main(int argc, const char **argv)
     std::unordered_map<std::string, std::string> tracker_positions;
 
     // Default values
-    tracker_positions["tracker_id_RED_0_pos_string"] = "pos=125.509767,143.875167,0";
-    tracker_positions["tracker_id_RED_6_pos_string"] = "pos=125.509767,-135.624833,0";
-    tracker_positions["tracker_id_RED_4_pos_string"] = "pos=-154.990233,-135.624833,0";
-    tracker_positions["tracker_id_RED_2_pos_string"] = "pos=-153.490233,144.375167,0";
+    tracker_positions["tracker_id_RED_5_pos_string"] = "pos=125.509767,143.875167,0";
+    tracker_positions["tracker_id_RED_3_pos_string"] = "pos=125.509767,-135.624833,0";
+    tracker_positions["tracker_id_RED_7_pos_string"] = "pos=-154.990233,-135.624833,0";
+    tracker_positions["tracker_id_RED_4_pos_string"] = "pos=-153.490233,144.375167,0";
     tracker_positions["tracker_id_BLACK_13_pos_string"] = "pos=130.251807,141.800150,0";
     tracker_positions["tracker_id_BLACK_11_pos_string"] = "pos=130.751807,-135.699850,0";
     tracker_positions["tracker_id_BLACK_9_pos_string"] = "pos=-146.748193,-135.199850,0";
@@ -210,10 +210,10 @@ int main(int argc, const char **argv)
         std::cout << pair.first << " = " << pair.second << std::endl;
     }
 
-    tracker_id_RED_0_pos_string = tracker_positions["tracker_id_RED_0_pos_string"];
-    tracker_id_RED_6_pos_string = tracker_positions["tracker_id_RED_6_pos_string"];
+    tracker_id_RED_5_pos_string = tracker_positions["tracker_id_RED_5_pos_string"];
+    tracker_id_RED_3_pos_string = tracker_positions["tracker_id_RED_3_pos_string"];
+    tracker_id_RED_7_pos_string = tracker_positions["tracker_id_RED_7_pos_string"];
     tracker_id_RED_4_pos_string = tracker_positions["tracker_id_RED_4_pos_string"];
-    tracker_id_RED_2_pos_string = tracker_positions["tracker_id_RED_2_pos_string"];
 
     tracker_id_BLACK_13_pos_string = tracker_positions["tracker_id_BLACK_13_pos_string"];
     tracker_id_BLACK_11_pos_string = tracker_positions["tracker_id_BLACK_11_pos_string"];
@@ -235,20 +235,20 @@ int main(int argc, const char **argv)
 
     /* Assign markers to the rigid body and indicate their positions
         w.r.t the centre of mass (obtained from calibration text file) */
-    owl.assignMarker(tracker_id_RED, 0, "0", tracker_id_RED_0_pos_string); // top left
-    owl.assignMarker(tracker_id_RED, 6, "6", tracker_id_RED_6_pos_string); // top right
-    owl.assignMarker(tracker_id_RED, 4, "4", tracker_id_RED_4_pos_string); // bottom right
-    owl.assignMarker(tracker_id_RED, 2, "2", tracker_id_RED_2_pos_string); // bottom left 
+    owl.assignMarker(tracker_id_RED, 4, "4", tracker_id_RED_5_pos_string); // top left
+    owl.assignMarker(tracker_id_RED, 2, "2", tracker_id_RED_3_pos_string); // top right
+    owl.assignMarker(tracker_id_RED, 6, "6", tracker_id_RED_7_pos_string); // bottom right
+    owl.assignMarker(tracker_id_RED, 5, "5", tracker_id_RED_4_pos_string); // bottom left 
 
     uint32_t tracker_id_BLACK = 2;
     owl.createTracker(tracker_id_BLACK, "rigid", "BLACK_rigid");
 
     /* Assign markers to the rigid body and indicate their positions
         w.r.t the centre of mass (obtained from calibration text file) */
-    owl.assignMarker(tracker_id_BLACK, 13, "13", tracker_id_BLACK_13_pos_string); // top left
-    owl.assignMarker(tracker_id_BLACK, 11, "11", tracker_id_BLACK_11_pos_string); // top right
-    owl.assignMarker(tracker_id_BLACK, 9, "9", tracker_id_BLACK_9_pos_string); // bottom right
-    owl.assignMarker(tracker_id_BLACK, 15, "15", tracker_id_BLACK_15_pos_string); // bottom left
+    owl.assignMarker(tracker_id_BLACK, 10, "10", tracker_id_BLACK_13_pos_string); // top left
+    owl.assignMarker(tracker_id_BLACK, 14, "14", tracker_id_BLACK_11_pos_string); // top right
+    owl.assignMarker(tracker_id_BLACK, 8, "8", tracker_id_BLACK_9_pos_string); // bottom right
+    owl.assignMarker(tracker_id_BLACK, 12, "12", tracker_id_BLACK_15_pos_string); // bottom left
 
     uint32_t tracker_id_BLUE = 3;
 
@@ -256,10 +256,10 @@ int main(int argc, const char **argv)
 
     /* Assign markers to the rigid body and indicate their positions
         w.r.t the centre of mass (obtained from calibration text file) */
-    owl.assignMarker(tracker_id_BLUE, 16, "16", tracker_id_BLUE_8_pos_string); // top left
-    owl.assignMarker(tracker_id_BLUE, 22, "22", tracker_id_BLUE_14_pos_string); // top right
-    owl.assignMarker(tracker_id_BLUE, 20, "20", tracker_id_BLUE_12_pos_string); // bottom right
-    owl.assignMarker(tracker_id_BLUE, 18, "18", tracker_id_BLUE_10_pos_string); // bottom left
+    owl.assignMarker(tracker_id_BLUE, 19, "19", tracker_id_BLUE_8_pos_string); // top left
+    owl.assignMarker(tracker_id_BLUE, 21, "21", tracker_id_BLUE_14_pos_string); // top right
+    owl.assignMarker(tracker_id_BLUE, 23, "23", tracker_id_BLUE_12_pos_string); // bottom right
+    owl.assignMarker(tracker_id_BLUE, 17, "17", tracker_id_BLUE_10_pos_string); // bottom left
 
 
     int frequency = atoi(argv[1]); // convert first argument to integer

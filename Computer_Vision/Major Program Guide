@@ -1,0 +1,131 @@
+CalibrationProcedure.py
+Purpose: Single camera calibration, to be used in aruco marker detection and pose determination
+
+Inputs:
+chessboardsize
+Size of the chessboard image in use for calibration For example a board with 13 columns and 8 rows of full squares would be input as (14,9) due to it having 13 + 1 columns and 8+1 rows
+size_of_chessboard_squares_mm 
+Size in mm of the width of a single square on the checker board.
+
+Outputs:
+calibration_matrix
+Camera calibration matrix
+distortion_coefficients
+Camera distortion matrix
+
+
+
+
+MarkerGenerator.py
+
+Purpose: Generate usable aruco markers to be printed for detection
+
+Inputs:
+aruco_dict
+Selected dictionary to use for marker generation
+Ie. cv.aruco.DICT_7X7_1000
+
+Method_Select
+1: Method 1 will generate a single marker
+2: Method 2 will generate the specified amount of markers
+
+num_markers
+Number of markers to generate if Method 2 was selected.
+
+Export
+Setting to 1 will export the generated markers, otherwise they are not exported (ie. set to 0)
+
+PltMarkers
+Setting to 1 will plot the generated markers, otherwise they are not plotted (ie. set to 0)
+
+ExportDir
+Directory the exported markers will be saved to.
+
+Outputs: Depending on the specified values of Export and PltMarkers it will save the generated markers as pngs to the specified directory and/or plot the markers.
+
+
+
+Live_Pose_Det.py
+Purpose: Superimpose the detected marker and marker pose on the input camera feed (single camera feed)
+
+Inputs: 
+DICT_USED = "DICT_7X7_50"
+Used dictionary for aruco marker generation
+
+OUTPUT_IMAGE_WIDTH = 600
+Width of the output image in pixels
+
+calibration_data_direc
+Directory of the saved camera calibration matrix
+
+distortion_data_direc 
+Directory of the saved camera distortion matrix
+
+Outputs:
+Plot of live feed with superimposed detected pose and marker outline.
+
+
+
+
+Stereovision.py
+Purpose: Superimpose the detected marker and marker pose on the input camera feed (stereo camera feed)
+
+Inputs:
+R_calibration_data_direc = "R_calibration_matrix.npy"
+Directory of the saved camera calibration matrix for right feed
+
+L_calibration_data_direc = "L_calibration_matrix.npy"
+Directory of the saved camera calibration matrix for left feed
+
+R_distortion_data_direc  = "R_distortion_matrix.npy"
+Directory of the saved camera distortion matrix for right feed
+
+L_distortion_data_direc  = "L_distortion_matrix.npy"
+Directory of the saved camera distortion matrix for left feed
+
+DICT_USED = "DICT_7X7_50"
+Used dictionary for aruco marker generation
+
+Outputs:
+Plot of live feed with superimposed detected pose and marker outline for both the left and right cameras (stacked:  right on top, left on bottom)
+
+
+
+
+
+Stereovision_calibration.py
+Purpose: Stereo camera calibration, to be used in aruco marker detection and pose determination
+
+Inputs:
+chessboardsize
+Size of the chessboard image in use for calibration For example a board with 13 columns and 8 rows of full squares would be input as (14,9) due to it having 13 + 1 columns and 8+1 rows
+
+size_of_chessboard_squares_mm 
+Size in mm of the width of a single square on the checker board.
+
+Outputs:
+stereoMap.xml
+Camera matrix calibration file for both the left and right feed
+
+L_calibration_matrix
+Camera calibration matrix for the left input of the stereo camera
+
+L_distortion_coefficients
+Camera distortion matrix for the left input of the stereo camera
+
+R_calibration_matrix
+Camera calibration matrix for the right input of the stereo camera
+
+R_distortion_coefficients
+Camera distortion matrix for the right input of the stereo camera
+
+
+
+
+Calibration_images.py
+Purpose: Capture stereo camera images, split them and save them for calibration usage
+
+Inputs: Camera feed, leftimages and rightimages folders set up within current directory
+
+Outputs: Left and right camera image captures into sub folders of leftimages and right images
+
